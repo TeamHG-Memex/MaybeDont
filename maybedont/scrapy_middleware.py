@@ -2,7 +2,7 @@ import logging, random, time
 
 from scrapy.exceptions import IgnoreRequest, NotConfigured
 
-from .dupe_predict import DupePredictor
+from maybedont import DupePredictor
 
 
 logger = logging.getLogger(__name__)
