@@ -88,6 +88,15 @@ To enable the middleware, the following settings are required::
 Middleware is only applied to requests with ``avoid_dup_content`` in
 ``request.meta``.
 
+Optional settings:
+
+- ``AVOID_DUP_CONTENT_THRESHOLD = 0.98`` - minimal probability when requests
+  are skipped.
+- ``AVOID_DUP_CONTENT_EXPLORATION = 0.05`` - probability of still making a
+  request that should be dropped
+- ``AVOID_DUP_CONTENT_INITIAL_QUEUE_LIMIT = 300`` - number of pages that
+  should be downloaded before DupePredictor is initialized
+
 
 How it works
 ------------

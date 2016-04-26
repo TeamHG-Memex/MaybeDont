@@ -16,25 +16,27 @@ class AvoidDupContentMiddleware:
     requests that are unlikely to get new content. Some requests are still
     downloaded to make crawling more robust against changes in site structure.
     It is applied only to requests with "avoid_dup_content" in meta.
-
-    Required settings:
-    AVOID_DUP_CONTENT_ENABLED = True
     '''
-    def __init__(self):
+    def __init__(self, *, initial_queue_limit, threshold, exploration):
         self.dupe_predictor = None
         # We initialize dupe detector only after gathering enough pages,
         # it needs them for better duplicate detection, to know which content
         # is common to a lot of pages, and which is unique.
         self.initial_queue = []  # (url, text)
-        self.initial_queue_limit = 300
-        self.threshold = 0.98
-        self.exploration = 0.05
+        self.initial_queue_limit = initial_queue_limit
+        self.threshold = threshold
+        self.exploration = exploration
 
     @classmethod
     def from_crawler(cls, crawler):
         if not crawler.settings.getbool('AVOID_DUP_CONTENT_ENABLED'):
             raise NotConfigured
-        return cls()
+        s = crawler.settings
+        return cls(
+            initial_queue_limit=s.getint(
+                'AVOID_DUP_CONTENT_INITIAL_QUEUE_LIMIT', 300),
+            threshold=s.getfloat('AVOID_DUP_CONTENT_THRESHOLD', 0.98),
+            exploration=s.getfloat('AVOID_DUP_CONTENT_EXPLORATION', 0.05))
 
     def process_request(self, request, spider):
         if not self.dupe_predictor or self.skip(request):
