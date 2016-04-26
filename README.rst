@@ -85,6 +85,9 @@ To enable the middleware, the following settings are required::
     AVOID_DUP_CONTENT_ENABLED = True
     DOWNLOADER_MIDDLEWARES['maybedont.scrapy_middleware.AvoidDupContentMiddleware'] = 200
 
+Middleware is only applied to requests with ``avoid_dup_content`` in
+``request.meta``.
+
 
 How it works
 ------------
