@@ -38,7 +38,9 @@ def get_min_hash(text, too_common, num_perm=128):
 
 
 try:
-    from scrapy.utils.url import canonicalize_url
+    from scrapy.utils.url import canonicalize_url as _canonicalize_url
+    def canonicalize_url(url):
+        return _canonicalize_url(url, keep_fragments=True)
 except ImportError:
     def canonicalize_url(url):
         return url
