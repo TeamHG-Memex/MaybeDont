@@ -12,17 +12,17 @@ logger = logging.getLogger(__name__)
 
 
 class DupePredictor(object):
-    ''' Learn to predict if the content is duplicate by the URL.
-    '''
+    """ Learn to predict if the content is duplicate by the URL.
+    """
     def __init__(self, texts_sample=None, jaccard_threshold=0.9, num_perm=128):
-        ''' Initialize DupePredictor.
+        """ Initialize DupePredictor.
         :param jaccard_threshold: a minimal jaccard similarity when pages
         are considered duplicates (intersection of content / union of content).
         :param texts_sample: a list of texts to calculate too_common_shingles
         - this allows a more precise duplicate detection, because now
         we know which parts are common to all pages, and which are unique
         for each page.
-        '''
+        """
         self.jaccard_threshold = jaccard_threshold
         self.num_perm = num_perm
         self.lsh = MinHashLSH(
@@ -59,9 +59,9 @@ class DupePredictor(object):
         # - more than one get param
 
     def get_dupe_prob(self, url):
-        ''' A probability of given url being a duplicate of some content
+        """ A probability of given url being a duplicate of some content
         that has already been seem.
-        '''
+        """
         path, query = _parse_url(url)
         dupestats = []
         extend_ds = lambda x: dupestats.extend(filter(None, (
@@ -90,9 +90,9 @@ class DupePredictor(object):
         return max(ds.get_prob() for ds in dupestats) if dupestats else 0.
 
     def update_model(self, url, text):
-        ''' Update prediction model with a page by given url and text content.
+        """ Update prediction model with a page by given url and text content.
         Return a list of item duplicates (for testing purposes).
-        '''
+        """
         min_hash = get_min_hash(text, self.too_common_shingles, self.num_perm)
         item_url = canonicalize_url(url)
         item_path, item_query = _parse_url(item_url)
@@ -185,12 +185,12 @@ class DupePredictor(object):
             ]
 
     def _nodup_filter(self, min_hash, all_urls, max_sample=200):
-        ''' This filters results that are considered not duplicates.
+        """ This filters results that are considered not duplicates.
         But we really need to check that, because lsh.query does not always
         return ALL duplicates, esp. when there are a lot of them, so
         here we double-check and return only urls that are NOT duplicates.
         Return estimated number of not duplicates.
-        '''
+        """
         if not all_urls:
             return 0
         urls = random.sample(all_urls, max_sample) \

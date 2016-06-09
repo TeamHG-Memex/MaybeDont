@@ -9,14 +9,14 @@ logger = logging.getLogger(__name__)
 
 
 class AvoidDupContentMiddleware(object):
-    '''
+    """
     Avoid requests for duplicate content. During crawling this middleware
     learns what parameters are important (influence content), and what can
     be safely ignored. Once it is confident it starts dropping most
     requests that are unlikely to get new content. Some requests are still
     downloaded to make crawling more robust against changes in site structure.
     It is applied only to requests with "avoid_dup_content" in meta.
-    '''
+    """
     def __init__(self, initial_queue_limit, threshold, exploration):
         self.dupe_predictor = None
         # We initialize dupe detector only after gathering enough pages,
