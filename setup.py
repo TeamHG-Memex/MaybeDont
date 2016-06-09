@@ -9,6 +9,8 @@ def read(fname):
 setup(
     name = 'MaybeDont',
     version = '0.1.0',
+    author = "Konstantin Lopuhin",
+    author_email = "kostia.lopuhin@gmail.com",
     description = 'A component that tried to avoid downloading duplite content',
     license = 'MIT',
     url = 'https://github.com/TeamHG-Memex/MaybeDont',
@@ -20,7 +22,7 @@ setup(
     ],
     classifiers=[
         'Development Status :: 3 - Alpha',
-        'Topic :: Web scraping, Utilities',
+        'Topic :: Internet :: WWW/HTTP :: Indexing/Search',
         'License :: OSI Approved :: MIT License',
         'Programming Language :: Python',
         'Programming Language :: Python :: 2',
