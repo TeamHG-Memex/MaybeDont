@@ -65,6 +65,14 @@ to get the probability. All visited urls and hashes of content are stored
 in memory, along with some indexing structures.
 
 
+Install
+-------
+
+::
+
+    pip install MaybeDont
+
+
 Spider middleware
 -----------------
 
