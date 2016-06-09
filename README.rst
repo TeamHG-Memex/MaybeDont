@@ -1,6 +1,10 @@
 MaybeDont
 =========
 
+.. image:: https://img.shields.io/pypi/v/MaybeDont.svg
+   :target: https://pypi.python.org/pypi/MaybeDont
+   :alt: PyPI Version
+
 .. image:: https://img.shields.io/travis/TeamHG-Memex/MaybeDont/master.svg
    :target: http://travis-ci.org/TeamHG-Memex/MaybeDont
    :alt: Build Status
