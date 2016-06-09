@@ -15,6 +15,7 @@ setup(
     packages = ['maybedont'],
     long_description=read('README.rst'),
     install_requires = [
+        'six',
         'datasketch>=0.2.0',
     ],
     classifiers=[
@@ -22,8 +23,8 @@ setup(
         'Topic :: Web scraping, Utilities',
         'License :: OSI Approved :: MIT License',
         'Programming Language :: Python',
-       #'Programming Language :: Python :: 2',
-       #'Programming Language :: Python :: 2.7',
+        'Programming Language :: Python :: 2',
+        'Programming Language :: Python :: 2.7',
         'Programming Language :: Python :: 3',
         'Programming Language :: Python :: 3.3',
         'Programming Language :: Python :: 3.4',

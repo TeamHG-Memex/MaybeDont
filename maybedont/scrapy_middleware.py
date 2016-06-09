@@ -8,7 +8,7 @@ from maybedont import DupePredictor
 logger = logging.getLogger(__name__)
 
 
-class AvoidDupContentMiddleware:
+class AvoidDupContentMiddleware(object):
     '''
     Avoid requests for duplicate content. During crawling this middleware
     learns what parameters are important (influence content), and what can
@@ -17,7 +17,7 @@ class AvoidDupContentMiddleware:
     downloaded to make crawling more robust against changes in site structure.
     It is applied only to requests with "avoid_dup_content" in meta.
     '''
-    def __init__(self, *, initial_queue_limit, threshold, exploration):
+    def __init__(self, initial_queue_limit, threshold, exploration):
         self.dupe_predictor = None
         # We initialize dupe detector only after gathering enough pages,
         # it needs them for better duplicate detection, to know which content

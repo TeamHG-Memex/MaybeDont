@@ -1,6 +1,7 @@
+from __future__ import absolute_import, division
 import logging, random, math
 from collections import namedtuple, defaultdict
-from urllib.parse import urlsplit, parse_qs
+from six.moves.urllib.parse import urlsplit, parse_qs
 
 from datasketch import MinHashLSH
 
@@ -10,7 +11,7 @@ from .utils import get_too_common_shingles, get_min_hash, canonicalize_url
 logger = logging.getLogger(__name__)
 
 
-class DupePredictor:
+class DupePredictor(object):
     ''' Learn to predict if the content is duplicate by the URL.
     '''
     def __init__(self, texts_sample=None, jaccard_threshold=0.9, num_perm=128):
@@ -246,7 +247,7 @@ def _log_dupstats(dupstats, name, min_dup):
 URLMeta = namedtuple('URLMeta', ['path', 'query', 'min_hash'])
 
 
-class DupStat:
+class DupStat(object):
     def __init__(self):
         self.dup = 0
         self.nodup = 0
