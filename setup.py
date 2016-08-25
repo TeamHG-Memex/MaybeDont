@@ -7,16 +7,16 @@ def read(fname):
 
 
 setup(
-    name = 'MaybeDont',
-    version = '0.1.0',
-    author = "Konstantin Lopuhin",
-    author_email = "kostia.lopuhin@gmail.com",
-    description = 'A component that tried to avoid downloading duplicate content',
-    license = 'MIT',
-    url = 'https://github.com/TeamHG-Memex/MaybeDont',
-    packages = ['maybedont'],
+    name='MaybeDont',
+    version='0.1.0',
+    author="Konstantin Lopuhin",
+    author_email="kostia.lopuhin@gmail.com",
+    description='A component that tried to avoid downloading duplicate content',
+    license='MIT',
+    url='https://github.com/TeamHG-Memex/MaybeDont',
+    packages=['maybedont'],
     long_description=read('README.rst'),
-    install_requires = [
+    install_requires=[
         'six',
         'datasketch>=0.2.0',
     ],
