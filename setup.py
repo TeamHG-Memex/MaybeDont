@@ -11,7 +11,7 @@ setup(
     version = '0.1.0',
     author = "Konstantin Lopuhin",
     author_email = "kostia.lopuhin@gmail.com",
-    description = 'A component that tried to avoid downloading duplite content',
+    description = 'A component that tried to avoid downloading duplicate content',
     license = 'MIT',
     url = 'https://github.com/TeamHG-Memex/MaybeDont',
     packages = ['maybedont'],
