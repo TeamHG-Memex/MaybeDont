@@ -14,7 +14,8 @@ logger = logging.getLogger(__name__)
 class DupePredictor(object):
     """ Learn to predict if the content is duplicate by the URL.
     """
-    def __init__(self, texts_sample=None, jaccard_threshold=0.9, num_perm=128):
+    def __init__(self, texts_sample=None, jaccard_threshold=0.9, num_perm=128,
+                 storage_config=None):
         """ Initialize DupePredictor.
         :param jaccard_threshold: a minimal jaccard similarity when pages
         are considered duplicates (intersection of content / union of content).
@@ -22,11 +23,22 @@ class DupePredictor(object):
         - this allows a more precise duplicate detection, because now
         we know which parts are common to all pages, and which are unique
         for each page.
+        :param storage_config: configuration for a redis backend to persist
+        minhashes in. Using this backend makes DupePredictor instances
+        persistent across restarts. The configuration format is:
+        storage_config={'type': 'redis', 'redis': {'host': 'localhost', 'port': 6379}}.
+        See https://ekzhu.github.io/datasketch/lsh.html#minhash-lsh-at-scale
         """
         self.jaccard_threshold = jaccard_threshold
         self.num_perm = num_perm
-        self.lsh = MinHashLSH(
-            threshold=self.jaccard_threshold, num_perm=self.num_perm)
+        self.storage_config = storage_config
+        if storage_config:
+            self.lsh = MinHashLSH(
+                threshold=self.jaccard_threshold, num_perm=self.num_perm,
+                storage_config=self.storage_config)
+        else:
+            self.lsh = MinHashLSH(
+                threshold=self.jaccard_threshold, num_perm=self.num_perm)
         self.too_common_shingles = set()
         if texts_sample:
             self.too_common_shingles = get_too_common_shingles(texts_sample)
