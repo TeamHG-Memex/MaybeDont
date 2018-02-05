@@ -1,5 +1,6 @@
 import logging, random, time
 
+import scrapy.http.response.text
 from scrapy.exceptions import IgnoreRequest, NotConfigured
 
 from maybedont import DupePredictor
@@ -57,7 +58,7 @@ class AvoidDupContentMiddleware(object):
                 raise IgnoreRequest
 
     def process_response(self, request, response, spider):
-        if not hasattr(response, 'xpath') or self.skip(request):
+        if not isinstance(response, scrapy.http.response.text.TextResponse) or self.skip(request):
             return response
         url, text = response.url, extract_text(response)
         t0 = time.time()
