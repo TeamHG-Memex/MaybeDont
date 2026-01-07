@@ -1,0 +1,8 @@
+./setup.py
+./tests/test_predict.py
+./tests/__init__.py
+./tests/test_middleware.py
+./maybedont/utils.py
+./maybedont/__init__.py
+./maybedont/scrapy_middleware.py
+./maybedont/predict.py
